@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Datatable</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
+</head>
+<body class="bg-light">
+    <div class="container mt-5">
+        <h1>To-Do List</h1>
+        <div class="mb-3">
+            <input type="text" id="name" class="form-control" placeholder="Enter task">
+        </div>
+        <div class="mb-3">
+            <input type="text" id="priority" class="form-control" placeholder="Enter priority">
+        </div>
+        <div>
+            <input type="button" id="addTaskButton" value="Add Task" class="btn btn-primary w-100">
+        </div>
+
+        <table id="example" class="table table-striped table-bordered mt-4" style="width:100%">
+            <thead>
+                <tr>
+                    <th>Sr.No.</th>
+                    <th>Task</th>
+                    <th>Priority</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th>Sr.No.</th>
+                    <th>Task</th>
+                    <th>Priority</th>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            let srno = 0; 
+            const table = $('#example').DataTable(); 
+
+           
+            $('#addTaskButton').click(function() {
+                let name = $('#name').val().trim();  
+                let priority = $('#priority').val().trim(); 
+
+             
+                if (!name || !priority || isNaN(priority)) {
+                    alert("Please enter valid task and priority.");
+                    return;
+                }
+
+                srno++; 
+
+                table.row.add([
+                    srno,       
+                    name,        
+                    priority     
+                ]).draw(); 
+
+                $('#name').val(''); 
+                $('#priority').val(''); 
+            });
+        });
+    </script>
+</body>
+</html>
